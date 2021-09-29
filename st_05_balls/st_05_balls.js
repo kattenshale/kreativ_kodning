@@ -3,7 +3,6 @@
 
   Skriv hvad din intention med programmet er,
   vigtige noter eller hvad du har lært mens du har arbejdet med programmet.
-  
 */
 
 let balls = [];
