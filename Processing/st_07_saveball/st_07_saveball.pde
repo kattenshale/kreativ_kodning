@@ -24,7 +24,7 @@ void draw() {
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
 
   noStroke();
-  fill(255,10);
+  fill(100,velocity.y*2);
   rect(0,0,width,height);
   
   // Add the current speed to the position.
@@ -39,7 +39,7 @@ void draw() {
 
   // Display circle at x position
   stroke(0);
-  fill(175);
+  fill(velocity.y, position.x, position.y);
   ellipse(position.x,position.y,16,16);
 }
 
