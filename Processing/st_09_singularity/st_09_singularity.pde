@@ -9,28 +9,39 @@
 import processing.pdf.*;
 import java.util.Calendar;
 
-
+int rate = 1;
 boolean savePDF = false;
 
 void setup(){
  
+  PFont mono;
+// The font "andalemo.ttf" must be located in the 
+// current sketch's "data" directory to load successfully
+  mono = createFont("bdplakatt.ttf", 90);
+  background(0);
+  textFont(mono);
   size(550, 550);
 }
 
 void draw(){
+
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
-  frameRate(random(6,20));
+  
+  frameRate(rate);
+  background(random(0,100),random(100,150),random(100,255));
   strokeCap(SQUARE);
   smooth();
   noFill();
-  background(random(0,100),random(100,150),random(100,255));
+  
   translate(width/2,height/2);
 
   int circleResolution = (int) map(random(width), 0, height, 2,80);
   float radius = random(width)-width/2 + 0.5;
   float angle = TWO_PI/circleResolution;
-  stroke(random(255));
+  stroke(random(200,255));
   strokeWeight(random(100)/20);
+
+  dynamicFrameRate();
 
   beginShape();
   for (int i=0; i<=circleResolution; i++){
@@ -41,11 +52,43 @@ void draw(){
     // vertex(x, y);
   }
   endShape();
+  MyText();
 
   if (savePDF) {
     savePDF = false;
     endRecord();
   }
+}
+
+void dynamicFrameRate(){
+
+    float min = 5.5;
+    float max = 34;
+    float maximumRate = 28;
+    
+    if(second() % 5 == 0){
+      rate += random(min,max);
+    } 
+    if(rate >= maximumRate){
+      rate = 1;
+    }
+
+}
+
+void MyText(){
+  String myText = "";
+
+  if (second() % 8 == 0){
+  
+    myText = "KREATIV  KODNING";
+  } else {
+
+    myText = "";
+  }
+
+  translate(-width/2,0);
+  fill(25);
+  text(myText, 20,20);
 }
 
 void keyPressed() {
