@@ -1,3 +1,36 @@
+# HELP
+---
+
+IF-ELSE
+    let a = 4;
+    if (a > 0) {
+        console.log('positive');
+    } else {
+        console.log('negative');
+    }
+
+---
+
+FOR LOOP
+for (let i = 0; i < 9; i++) {
+  console.log(i);
+}
+
+---
+
+FUNCTIONS
+// variable
+let myName = 'Hridi';
+
+// function
+function sayHello(name) {
+  console.log('Hello ' + name + '!');
+}
+
+// run function
+sayHello(myName); // calling the function, prints "Hello Hridi!" to console.
+
+---
 VÆRDIER
 
 # X & Y koordinater
