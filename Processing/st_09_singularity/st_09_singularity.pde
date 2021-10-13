@@ -9,7 +9,7 @@
 import processing.pdf.*;
 import java.util.Calendar;
 
-int rate = 1;
+float rate = 1;
 boolean savePDF = false;
 
 void setup(){
@@ -28,22 +28,32 @@ void draw(){
   if (savePDF) beginRecord(PDF, timestamp()+".pdf");
   
   frameRate(rate);
-  background(random(0,100),random(100,150),random(100,255));
+  background(second()*0.3,random(100,150),random(0,255));
   strokeCap(SQUARE);
   smooth();
   noFill();
   
+  text(frameRate, 10, 50);
+  //println(frameRate);
   translate(width/2,height/2);
 
-  int circleResolution = (int) map(random(width), 0, height, 2,80);
+  int circleResolution = (int) map(random(width-30), 0, height-30, 3,80);
   float radius = random(width)-width/2 + 0.5;
   float angle = TWO_PI/circleResolution;
-  stroke(random(200,255));
-  strokeWeight(random(100)/20);
+  
+      if(second() % 3 == 0){
+        stroke(random(0,200));
+      } else
+      {
+        stroke(random(200,255));
+      }
+
+  strokeWeight(random(10,40));
 
   dynamicFrameRate();
 
   beginShape();
+  
   for (int i=0; i<=circleResolution; i++){
 
     float x = cos(angle*i) * radius;
@@ -62,20 +72,23 @@ void draw(){
 
 void dynamicFrameRate(){
 
-    float min = 5.5;
-    float max = 34;
-    float maximumRate = 28;
-    
-    if(second() % 5 == 0){
-      rate += random(min,max);
-    } 
-    if(rate >= maximumRate){
-      rate = 1;
+    float min = 4.5;
+    float max = 9;
+   
+    if(rate >= max){
+      rate = min;
     }
 
+
+    if(second() % 3 == 0){
+      rate += random(min,max);
+    } 
+    
+ 
 }
 
 void MyText(){
+ 
   String myText = "";
 
   if (second() % 8 == 0){
